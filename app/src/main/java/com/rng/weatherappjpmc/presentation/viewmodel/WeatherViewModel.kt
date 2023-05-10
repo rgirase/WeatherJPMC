@@ -42,6 +42,7 @@ class WeatherViewModel @Inject constructor(
      */
     fun getLocationFromPreferences() {
         viewModelScope.launch {
+            weatherState = weatherState.copy(isLoading = true)
             dataStore.data.collect { preferences ->
                 preferences[LAST_LAT]?.let { lat ->
                     preferences[LAST_LONG]?.let { long ->

@@ -158,7 +158,10 @@ fun WeatherCard(weatherResponse: WeatherResponse) {
                 val iconId = weatherResponse.weather[0].icon
                 GlideImage(
                     model = "https://openweathermap.org/img/wn/${iconId}@2x.png",
-                    contentDescription = ""
+                    contentDescription = "Weather Icon",
+                    modifier = Modifier
+                        .width(40.dp)
+                        .height(40.dp)
                 )
                 Spacer(modifier = Modifier.width(4.dp))
                 Text(

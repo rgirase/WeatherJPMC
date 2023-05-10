@@ -18,6 +18,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
@@ -86,13 +87,6 @@ fun WeatherHomeScreen(
                 )
             }
 
-            if (viewModel.weatherState.coordinatesResponse != null) {
-                viewModel.weatherState.coordinatesResponse?.let { coordinatesResponse ->
-                    searchText.value =
-                        coordinatesResponse[0].name + "," + coordinatesResponse[0].state + "," + coordinatesResponse[0].country
-                }
-            }
-
             if (viewModel.weatherState.isLoading) {
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
             }
@@ -126,10 +120,12 @@ fun WeatherHomeScreen(
 fun WeatherCard(weatherResponse: WeatherResponse) {
     Card(
         shape = RoundedCornerShape(10.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = DeepBlue,
+        ),
         modifier = Modifier
             .wrapContentSize()
             .padding(16.dp)
-            .background(DeepBlue)
     ) {
         Column(
             modifier = Modifier
@@ -165,7 +161,10 @@ fun WeatherCard(weatherResponse: WeatherResponse) {
                 val iconId = weatherResponse.weather[0].icon
                 GlideImage(
                     model = "https://openweathermap.org/img/wn/${iconId}@2x.png",
-                    contentDescription = ""
+                    contentDescription = "Weather Icon",
+                    modifier = Modifier
+                        .width(40.dp)
+                        .height(40.dp)
                 )
                 Spacer(modifier = Modifier.width(4.dp))
                 Text(

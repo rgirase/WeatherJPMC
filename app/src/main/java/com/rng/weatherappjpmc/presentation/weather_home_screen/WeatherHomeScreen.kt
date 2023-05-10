@@ -86,13 +86,6 @@ fun WeatherHomeScreen(
                 )
             }
 
-            if (viewModel.weatherState.coordinatesResponse != null) {
-                viewModel.weatherState.coordinatesResponse?.let { coordinatesResponse ->
-                    searchText.value =
-                        coordinatesResponse[0].name + "," + coordinatesResponse[0].state + "," + coordinatesResponse[0].country
-                }
-            }
-
             if (viewModel.weatherState.isLoading) {
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
             }
